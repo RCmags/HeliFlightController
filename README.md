@@ -8,3 +8,10 @@ The program is designed to receive 4 PWM inputs from an RC receiver (operating i
 Stabilization about pitch and roll is accomplished via a PID loop using the Gyro measurements from the MPU6050 as the proportional term. Stabilization about the yaw axis uses a PI loop along with a torque-offset term that increases with throttle (revo mixing). That is, as more throttle is added, the tail rotor is commanded to apply more counter-torque.     
 
 NOTE: MODE 1 can also be used with this program. It is only a matter of swapping the RX connections to the arduino. Lastly, The program was written for an Arduino Nano but it should be compatible with other boards. 
+
+See these links for flight videos of a helicopter that uses this software:
+  
+https://www.youtube.com/watch?v=qZ7qUPAXkvc
+
+https://www.youtube.com/watch?v=zrrgVdPAhFI
+
