@@ -243,6 +243,7 @@ void input_calibrate( void ) {
 
 //=== PWM inputs
 
+// Beggining from PIN 8, iterate up to PIN 11 and check for Pin Change Interrupts. 
 ISR( PCINT0_vect ) {  
 
   static int32_t change_time[N_INPUTS] = {0};
