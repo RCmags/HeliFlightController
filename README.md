@@ -1,7 +1,7 @@
 # HeliFlightController
 This Arduino sketch is a simple flight controller for a 4ch RC heli based on an MPU6050 6-axis gyroscope/accelerometer. Even though the MPU has an accelerometer, this data is ignored and only the gyroscope data is used. This means the flight controller is more akin to a flybarless stabilization unit than the flight controllers found on multirotors. 
 
-In light of this, the only accomplished by the program is that it gives a helicopter a greater degree of short-term stability, enough for a human to pilot the vehicle relatively easily. Still, as with any helicopter, a minimum degree of skill is required in order to pilot the aircraft.
+In light of this the program only gives the helicopter enough short-term stability, enough that a human can stabilize the vehicle relatively easily in the long-term. Still, as with any helicopter, a minimum degree of skill is required in order to pilot the aircraft.
 
 The program is designed to receive 4 PWM inputs from an RC receiver (operating in MODE 2) and outputs 3 PWM signals. Two of these signals go to the cyclic servos of the helicopters and a third goes to a either a tail-servo or an RC speed controller. Since it is assumed only two servo motors are used for controlling the rotor, only a 90-degree swashplate is supported. 
 
