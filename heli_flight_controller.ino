@@ -15,61 +15,61 @@
 //=========== Constants ===========
 
 //Misc:
-const int MPU6050_addr		= 0x68;
-const int N_AXES 			= 3;
-const int LED_DELAY 		= 200;
+const int MPU6050_addr      = 0x68;
+const int N_AXES            = 3;
+const int LED_DELAY         = 200;
 
 
 //Gyro Calibration:
-const int N_ITERATE 		= 5;
-const float CALIB_COUNT 	= 200;
-const float MOTION_LIMIT 	= 1000;
+const int N_ITERATE         = 5;
+const float CALIB_COUNT     = 200;
+const float MOTION_LIMIT    = 1000;
 
 // PWM inputs:
-const int N_INPUTS 			= 4;
-const int DEADBAND 			= 4;
-const float DECAY_INPUT 	= 0.15;
-const int INPUT_CALIB_TIME	= 200;
-const int INPUT_COUNT 		= 10;
+const int N_INPUTS          = 4;
+const int DEADBAND          = 4;
+const float DECAY_INPUT     = 0.15;
+const int INPUT_CALIB_TIME  = 200;
+const int INPUT_COUNT       = 10;
 
 // PWM outputs:
-const int PWM_MID 			= 1500;
-const int PWM_CHANGE 		= 700;
-const int PIN_OUTPUTS[]	 	= { 3, 4, 5, 6 };
+const int PWM_MID           = 1500;
+const int PWM_CHANGE        = 700;
+const int PIN_OUTPUTS[]     = { 3, 4, 5, 6 };
 const int N_OUTPUTS = sizeof(PIN_OUTPUTS)/sizeof( PIN_OUTPUTS[0] ) ;
 
     //Gyro filters:
-const float DECAY_RAW 		= 0.3;
-const float COEFF_DERIV[] 	= {2, 1, 0, -1, -2};
-const float DENOM_DERIV 	= 8;
+const float DECAY_RAW       = 0.3;
+const float COEFF_DERIV[]   = {2, 1, 0, -1, -2};
+const float DENOM_DERIV     = 8;
 const int N_DERIV = sizeof( COEFF_DERIV )/sizeof( COEFF_DERIV[0] );
 
     //Gyro Misc:
-const int GYRO_AXIS[] 		= { 2, 1, 0 };
-const float DEAD_GYRO 		= 150;
+const int GYRO_AXIS[]       = { 2, 1, 0 };
+const float DEAD_GYRO       = 150;
 
 //PID Gains:
     //Input gains:
-const float GAIN_INPUT[N_AXES] 		= { -0.30, 0.30, 0.2 };
-const float DEAD_INPUT_INT 			= 20;
-const float GAIN_INPUT_INT[N_AXES] 	= { -0.009, 0.009, 0.002 }; 
+const float GAIN_INPUT[N_AXES]      = { -0.30, 0.30, 0.2 };
+const float DEAD_INPUT_INT          = 20;
+const float GAIN_INPUT_INT[N_AXES]  = { -0.009, 0.009, 0.002 }; 
     //Gyro gains:
-const float GAIN_PROP[N_AXES] 		= { 0.0135 , 0.0135 , 0.006 };
-const float GAIN_DERIV[N_AXES] 		= { 0.22 , 0.22 , 0.145 };
-const float GAIN_INT[N_AXES] 		= { 0.00035 , 0.00035 , 0.00005 }; 
-	
-	// Servo offset:
-const int SUBTRIM[N_AXES] 			= { 60, 0, -250 };
+const float GAIN_PROP[N_AXES]       = { 0.0135 , 0.0135 , 0.006 };
+const float GAIN_DERIV[N_AXES]      = { 0.22 , 0.22 , 0.145 };
+const float GAIN_INT[N_AXES]        = { 0.00035 , 0.00035 , 0.00005 }; 
+    
+    // Servo offset:
+const int SUBTRIM[N_AXES]           = { 60, 0, -250 };
 
     //Integral term:
-const float INT_MAX 		= 400;
-const float INT_DECAY 		= 0.0005;
+const float INT_MAX         = 400;
+const float INT_DECAY       = 0.0005;
 
     //Torque offset:
-const int T_BIAS 			= 400;
-const float T_GAIN 			= 280.0;
-const float T_POWER 		= 0.7;
-const float PWM_RANGE 		= 750;
+const int T_BIAS            = 400;
+const float T_GAIN          = 280.0;
+const float T_POWER         = 0.7;
+const float PWM_RANGE       = 750;
 
     //Phase angle:
 const float PHASE = ( PI/180.0 ) * -25.0;
