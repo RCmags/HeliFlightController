@@ -7,13 +7,16 @@ The program is designed to receive 4 PWM inputs from an RC receiver (operating i
 
 MODE 1 can also be used with this program. It is only a matter of swapping the RX connections to the arduino. Lastly, The program was written for an Arduino Nano but it should be compatible with other boards. See the attached schematic for an example of the required circuit.
 
-![picture](heli_flight_control_schem.png)
-
+<img src = "heli_flight_control_schem.png" width = "80%" height = "80%"> 
 
 See these links for flight videos of a helicopter that uses this software:
   
-https://www.youtube.com/watch?v=qZ7qUPAXkvc
+- https://www.youtube.com/watch?v=qZ7qUPAXkvc
+- https://www.youtube.com/watch?v=zrrgVdPAhFI
 
-https://www.youtube.com/watch?v=zrrgVdPAhFI
+
+Finally, below are images of the helicopter this code was initially writen for:
+
+<img src = "/example_pictures/front_view_res.JPG" width = "30%" height = "30%"> <img src = "/example_pictures/side_view_res.JPG" width = "30%" height = "30%">
 
 
