@@ -14,5 +14,5 @@ See these links for flight videos of a helicopter that uses this software:
 
 Finally, below are images of the helicopter this code was initially writen for:
 
-<img src = "/example_pictures/front_view_res.JPG" width = "30%" height = "30%"> <img src = "/example_pictures/side_view_res.JPG" width = "30%" height = "30%"> <img src = "/example_pictures/arduino_view_res.JPG" width = "30%" height = "30%">
+<img src = "/example_pictures/front_view_res.JPG" width = "30%" height = "30%"> <img src = "/example_pictures/arduino_view_res.JPG" width = "30%" height = "30%">
 
