@@ -5,7 +5,7 @@ Stabilization about pitch and roll is accomplished via a PID loop using the Gyro
 
 The program is designed to receive 4 PWM inputs from an RC receiver operating in MODE 2 and outputs 3 PWM signals. Two signals go to the cyclic servos and the third goes to a tail-servo or a speed controller. Since it is assumed only two servo motors are used for controlling the rotor, only a [90-degree swashplate](https://www.rchelicopterfun.com/ccpm.html) is supported. MODE 1 can be used with this program by swapping the RX connections at the arduino. 
 
-The program was written for an Arduino Nano but it should be compatible with other boards. See the schematic for the required circuit:
+The program was written for an Arduino Nano but it should be compatible with other boards. See the schematic for the tail-motor variant of the required circuit:
 
 <img src = "heli_flight_control_schem.png" width = "80%" height = "80%"> 
 
