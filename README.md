@@ -18,3 +18,4 @@ Finally, below are images of the helicopter this code was initially writen for:
 
 <img src = "/example_pictures/front_view_res.JPG" width = "30%" height = "30%"> <img src = "/example_pictures/side_rev_view_res.JPG" width = "30%" height = "30%"> <img src = "/example_pictures/arduino_view_res.JPG" width = "30%" height = "30%"> 
 
+<img src = "/example_pictures/stab_motion.gif" width = "30%" height = "30%"> <img src = "/example_pictures/pitch_stab.gif" width = "30%" height = "30%"> <img src = "/example_pictures/yaw_stab.gif" width = "30%" height = "30%">
