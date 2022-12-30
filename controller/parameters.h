@@ -9,22 +9,29 @@
 //----------------------------------------------------------
 //                  5. Pitch Stabilization
 //----------------------------------------------------------
-#define PHASE_ANGLE      -20       // deg      // Pitch-roll coupling angle. Adjust until control axes respond independently.
-
+/* NOTE: For a given axis, the propotional, integral and 
+         derivative terms must have the same sign */
   // I. Proportional:                         // Proportional gain. Adjusts damping response. Increase to retard rotation. 
 #define GAIN_PROP_ROLL    100
-#define GAIN_PROP_PITCH  -100
+#define GAIN_PROP_PITCH   100
 #define GAIN_PROP_YAW     15
   
   // II. Integral:                            // Integral gain. Adjusts spring respose. Increase to have a stronger restoring force.
 #define GAIN_INT_ROLL     500
-#define GAIN_INT_PITCH   -500
+#define GAIN_INT_PITCH    500
 #define GAIN_INT_YAW      120
 
   // III. Derivative:                         // Derivative gain. Reduces oscillations of proportional term. Magnifies vibration noise.
 #define GAIN_DERIV_ROLL   3.0
-#define GAIN_DERIV_PITCH  -3.0
+#define GAIN_DERIV_PITCH  3.0
 #define GAIN_DERIV_YAW    1.5
+
+  // IV. Other:
+#define PHASE_ANGLE      -20       // deg      // Pitch-roll coupling angle. Adjust until control axes respond independently.
+      
+//#define NEGATE_ROLL                            // Uncomment to reverse roll deflection
+#define NEGATE_PITCH                           // Uncomment to reverse pitch deflection
+//#define NEGATE_YAW                             // Uncomment to reverse yaw deflection
 
 /* NOTE: must enable integral decay to use */
 #define DECAY_ROTOR       0                   // Decay rate of pitch/roll integral term. 
@@ -54,7 +61,7 @@
 //---------------------------------------------------------- 
 #define TORQUE_POWER      0.5                 /* Exponent of tail rotor correction curve. Make smaller to have 
                                                  correction change faster at low throttle. */
-#define TORQUE_GAIN       200                 // Magnitude of tail rotor correction. Increase to apply a larger counter-torque. 
+#define TORQUE_GAIN       250                 // Magnitude of tail rotor correction. Increase to apply a larger counter-torque. 
 
 //----------------------------------------------------------
 //                  3. Output PWM signal

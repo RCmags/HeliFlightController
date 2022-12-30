@@ -53,11 +53,25 @@ void PIDcontroller( float* input, float* output ) {
     output[i] = GAIN_PROP[i]*angvel[i] + angle[i] + GAIN_DERIV[i]*angacc[i];
   }
 
+  // 2. parameters:
+  
   #ifdef USING_WEIGHT_SHIFT
     float accel = accelZ();
     float gain = accel == 0 ? 0 : 1/accel;    // deflection must increase with lower lift
     output[0] *= gain;
     output[1] *= gain;
+  #endif
+
+  #ifdef NEGATE_ROLL
+    output[0] = -output[0];
+  #endif
+
+  #ifdef NEGATE_PITCH
+    output[1] = -output[1];
+  #endif
+
+  #ifdef NEGATE_YAW
+    output[2] = -output[2];
   #endif
 }
 
@@ -75,7 +89,7 @@ void autoLevel(float* output) {
 
 /* counter main-rotor torque via yaw bias */
 float torqueBias(float input) {
-  constexpr float SCALE = 2.0 / PWM_CHANGE;
+  constexpr float SCALE = 0.5 / PWM_CHANGE;
   input = input < 0 ? 0 : input;
   input *= SCALE;
   return pow(input, TORQUE_POWER) * TORQUE_GAIN;  

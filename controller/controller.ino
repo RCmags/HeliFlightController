@@ -5,8 +5,8 @@
  * Author: RCmags https://github.com/RCmags
  * 
  * NOTE: 
- * This sketch uses an MPU6050 IMU (gyroscope and accelerometer) to stabilize the vehicle. It assumes that only 
- * lift and gravity act on the aircraft, and that any external torques are negligible.
+ * This sketch uses an MPU6050 IMU (gyroscope and accelerometer) to stabilize the vehicle. It assumes 
+ * that only lift and gravity act on the aircraft, and that any external torques are negligible.
 */
 //=============== Connections ================
 // See included schematic
