@@ -48,10 +48,7 @@ void setup() {
   // sensor
   imu.setup();
   imu.setBias();
-
-  #ifdef USING_AUTO_LEVEL
-    setupFusion();
-  #endif
+  setupFusion();
   
   // pause before calibrating RX signals
   blinkLED();
@@ -64,14 +61,7 @@ void loop() {
   float input[4]; filterInputs(input);            // get RX inputs
 
   // controller output
-  float output[3]; 
-  
-  #ifdef USING_AUTO_LEVEL
-    updateFusion();
-    autoLevel(input);
-  #endif  
-  
-  PIDcontroller(input, output);  
+  float output[3]; PIDcontroller(input, output);  
 
   #ifdef USING_TAIL_ROTOR
     output[2] += torqueBias( input[3] );          // anti-torque
