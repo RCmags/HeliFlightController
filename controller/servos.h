@@ -4,8 +4,8 @@ Servo servo[3];
 
 //---------------------- Constants -------------------------
 
-constexpr float PWM_MID_SERVO[] = { PWM_MID + TRIM_PITCH, 
-                                    PWM_MID + TRIM_ROLL, 
+constexpr float PWM_MID_SERVO[] = { PWM_MID + TRIM_ROLL, 
+                                    PWM_MID + TRIM_PITCH, 
                                     PWM_MID + TRIM_YAW };
                                     
 constexpr int SERVO_PIN[] = {3,4,5};    // Output pins: roll, pitch, yaw

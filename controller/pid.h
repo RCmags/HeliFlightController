@@ -84,7 +84,7 @@ void autoLevel(float* output) {
 
     // control rates
   output[1] += float(GAIN_ANG_PITCH) * angle_x;  // pitch
-  output[0] += float(GAIN_ANG_ROLL) * angle_y;   // roll
+  output[0] -= float(GAIN_ANG_ROLL) * angle_y;   // roll
 }
 
 /* counter main-rotor torque via yaw bias */

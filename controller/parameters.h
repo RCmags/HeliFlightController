@@ -14,17 +14,17 @@
   // I. Proportional:                         // Proportional gain. Adjusts damping response. Increase to retard rotation. 
 #define GAIN_PROP_ROLL    100
 #define GAIN_PROP_PITCH   100
-#define GAIN_PROP_YAW     15
+#define GAIN_PROP_YAW     35
   
   // II. Integral:                            // Integral gain. Adjusts spring respose. Increase to have a stronger restoring force.
-#define GAIN_INT_ROLL     500
-#define GAIN_INT_PITCH    500
-#define GAIN_INT_YAW      120
+#define GAIN_INT_ROLL     700
+#define GAIN_INT_PITCH    700
+#define GAIN_INT_YAW      200
 
   // III. Derivative:                         // Derivative gain. Reduces oscillations of proportional term. Magnifies vibration noise.
-#define GAIN_DERIV_ROLL   3.0
-#define GAIN_DERIV_PITCH  3.0
-#define GAIN_DERIV_YAW    1.5
+#define GAIN_DERIV_ROLL   4.0
+#define GAIN_DERIV_PITCH  4.0
+#define GAIN_DERIV_YAW    0.5
 
   // IV. Other:
 #define PHASE_ANGLE      -20       // deg      // Pitch-roll coupling angle. Adjust until control axes respond independently.
@@ -39,7 +39,7 @@
 
 /* NOTE: must enable auto level to use */
 #define GAIN_ANG_PITCH    500                 // Gain to set pitch input to self-level aircraft
-#define GAIN_ANG_ROLL    -500                 // Gain to set roll input to self-level aircraft
+#define GAIN_ANG_ROLL     500                 // Gain to set roll input to self-level aircraft
 
 //----------------------------------------------------------
 //                  2. Servo trims
@@ -73,6 +73,6 @@
 //                  6. Settings
 //---------------------------------------------------------- 
 #define USING_WEIGHT_SHIFT                    // Uncomment for weight-shift control 
-#define USING_TAIL_ROTOR                      // Uncomment for tail rotor correction
+//#define USING_TAIL_ROTOR                      // Uncomment for tail rotor correction
 #define USING_INTEGRAL_DECAY                  // Uncomment to enable integral decay
 //#define USING_AUTO_LEVEL                      // Uncomment to enable self-leveling correction
