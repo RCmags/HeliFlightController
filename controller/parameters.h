@@ -4,7 +4,7 @@
 //----------------------------------------------------------
 #define GAIN_PITCH       -0.8                 // Pitch servo
 #define GAIN_ROLL        -0.8                 // Roll servo
-#define GAIN_YAW         -1.2                 // Yaw servo / Tail ESC
+#define GAIN_YAW         -1.6                 // Yaw servo / Tail ESC
 
 //----------------------------------------------------------
 //                  5. Pitch Stabilization
