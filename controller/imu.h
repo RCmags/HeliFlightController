@@ -25,12 +25,16 @@ basicMPU6050<LP_FILTER , GYRO_SENS , ACCEL_SENS, ADDRESS_A0,
 //----------------------------------------------------------
 
 // Rotated outputs [adjust depending on sensor orientation]
+/* The gyroscope axes may not be aligned the axes of the aircraft. 
+ * To circumvent this problem, the sensor axes can be swapped to 
+ * match roll, pitch and yaw axes, (x, y, z) respectively. 
+*/
 
-/* gyro axes must match accelerometer */
 float gyroX() { return  imu.gy(); } 
 float gyroY() { return -imu.gz(); }
 float gyroZ() { return  imu.gx(); }
 
+// accelerometer axes must match gyroscope 
 float accelX() { return  imu.ay(); }
 float accelY() { return -imu.az(); }
 float accelZ() { return  imu.ax(); }
