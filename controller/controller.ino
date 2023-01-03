@@ -31,38 +31,36 @@
 
 //----- Main loop
 
-void blinkLED() {
-  pinMode(LED_BUILTIN, OUTPUT);
-  for( int i=0; i < 5; i += 1 ) {
-    delay(250);
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(250);
-    digitalWrite(LED_BUILTIN, LOW);
-  }
-}
-
-void setup() {  
+void setup() { 
+  digitalWrite(LED_BUILTIN, LOW); 
+  delay(1000);       // Allow RX to startup
+  
   setupISR();
   setupServos();
   
-  // sensor
   imu.setup();
   imu.setBias();
-  setupFusion();
-  
-  // pause before calibrating RX signals
-  blinkLED();
+
+  #ifdef USING_AUTO_LEVEL
+    setupFusion();
+  #endif
+
+  digitalWrite(LED_BUILTIN, HIGH);
 }
 
 void loop() {
-  imu.updateBias();
-
   // RX inputs
   float input[4]; filterInputs(input);            // get RX inputs
 
   // controller output
-  float output[3]; PIDcontroller(input, output);  
-
+  imu.updateBias();
+  
+  #ifdef USING_AUTO_LEVEL
+    autoLevel(input);
+  #endif  
+  
+  float output[3]; PIDcontroller(input, output);
+  
   #ifdef USING_TAIL_ROTOR
     output[2] += torqueBias( input[3] );          // anti-torque
   #endif

@@ -3,7 +3,7 @@
 /* Apply PID controller to each rotational axis */
 void PIDcontroller( float* input, float* output ) {
   // 1. Time step:
-  static uint32_t time_last = micros();  // initial measurement
+  static uint32_t time_last = micros()-1;  // dither initial measurement (avoid zero division)
    
   uint32_t time_now = micros();
   float dt = float(time_now - time_last)*1e-6;
@@ -11,56 +11,53 @@ void PIDcontroller( float* input, float* output ) {
 
   // 0. Constants:
       // PID coefficients:
+  constexpr float DECAY[]      = { DECAY_ROTOR    , DECAY_ROTOR     , DECAY_YAW      };
   constexpr float GAIN_PROP[]  = { GAIN_PROP_ROLL , GAIN_PROP_PITCH , GAIN_PROP_YAW  };
   constexpr float GAIN_INT[]   = { GAIN_INT_ROLL  , GAIN_INT_PITCH  , GAIN_INT_YAW   };
   constexpr float GAIN_DERIV[] = { GAIN_DERIV_ROLL, GAIN_DERIV_PITCH, GAIN_DERIV_YAW };
     
     // integral term:
-  constexpr float SCALE_RATE = (DEG_TO_RAD * 150) / 500;    // Convert 500us to 150 deg/s 
-  constexpr float SCALE_ANGLE = (DEG_TO_RAD * 45) / 500;      // Convert 500us to 30 deg
-  
-  constexpr float ANG_ROLL = TRIM_ANG_ROLL * DEG_TO_RAD;
-  constexpr float ANG_PITCH = TRIM_ANG_PITCH * DEG_TO_RAD;
+  constexpr float SCALE = (DEG_TO_RAD * 150) / 500;   // control input rate. Convert 500us to 150 deg/s 
     
     // alpha-beta filter:
   constexpr float BETA = ALPHA * ALPHA * 0.25;
 
   // 1. Calculus
-  static vec3_t angacc = {0,0,0};     // derivative
-  static vec3_t angvel_s = {0,0,0};   // smoothed proportional
+  static float angle[3] = {0};      // integral
+  static float angacc[3] = {0};     // derivative
+  static float angvel_s[3] = {0};   // smoothed proportional
 
-    // state
-  vec3_t angle = { fusion.roll(), fusion.pitch(), fusion.yaw() };
-  vec3_t angvel = { gyroX(), gyroY(), gyroZ() };
-
-    // alpha-beta filter
-  vec3_t dvel = angvel - angvel_s;
-  angvel_s += angacc*dt + ALPHA*dvel;
-  angacc += BETA * dvel/dt;
+  float angvel[] = { gyroX(), gyroY(), gyroZ() };
   
-  #ifdef USING_AUTO_LEVEL
-    vec3_t accel = { accelX(), accelY(), accelZ() };    
-      // only integrate yaw
-    angvel.z -= input[2] * SCALE_RATE;   
-    fusion.update( angvel, accel, GAIN, SD_ACCEL );  
-      // bias angle
-    angle.x -= ANG_ROLL + input[0]*SCALE_ANGLE;
-    angle.y -= ANG_PITCH + input[1]*SCALE_ANGLE;
-     
-  #else // relative control
-    angvel -= vec3_t(input)*SCALE_RATE;
-    fusion.update( angvel );
-  #endif
+  for( int i = 0; i < 3; i += 1 ) {
+    // alpha-beta filter:
+    float dvel = angvel[i] - angvel_s[i];
+    angvel_s[i] += angacc[i]*dt + ALPHA*dvel;   // smoothed proportional
+    angacc[i] += BETA*dvel / dt;                // derivative
 
-  output[0] = GAIN_PROP[0]*angvel.x + GAIN_INT[0]*angle.x + GAIN_DERIV[0]*angacc.x;
-  output[1] = GAIN_PROP[1]*angvel.y + GAIN_INT[1]*angle.y + GAIN_DERIV[1]*angacc.y;
-  output[2] = GAIN_PROP[2]*angvel.z + GAIN_INT[2]*angle.z + GAIN_DERIV[2]*angacc.z;
-  
+    // target rate
+    float angvel_t = input[i] * SCALE;          // target angular velocity
+    angvel[i] -= angvel_t; 
+    
+    // integrate
+    angvel[i] += angacc[i] * 0.5 * dt;           // trapezoidal rule. Use derivative to improve area slice. 
+    angle[i] += GAIN_INT[i] * angvel[i] * dt;
+
+    #ifdef USING_INTEGRAL_DECAY
+      angle[i] -= DECAY[i] * angle[i] * dt;       
+    #endif
+    
+    angle[i] = constrain(angle[i], -PWM_CHANGE, PWM_CHANGE);  // prevent windup
+
+    // sum terms
+    output[i] = GAIN_PROP[i]*angvel[i] + angle[i] + GAIN_DERIV[i]*angacc[i];
+  }
+
   // 2. parameters:
   
   #ifdef USING_WEIGHT_SHIFT
-    float acc = accelZ();
-    float gain = acc == 0 ? 0 : 1/acc;    // deflection must increase with lower lift
+    float accel = accelZ();
+    float gain = accel == 0 ? 0 : 1/accel;    // deflection must increase with lower lift
     output[0] *= gain;
     output[1] *= gain;
   #endif
@@ -76,6 +73,21 @@ void PIDcontroller( float* input, float* output ) {
   #ifdef NEGATE_YAW
     output[2] = -output[2];
   #endif
+}
+
+/* bias controls to self upright */
+void autoLevel(float* output) {
+  constexpr float ANG_ROLL = TRIM_ANG_ROLL * DEG_TO_RAD;
+  constexpr float ANG_PITCH = TRIM_ANG_PITCH * DEG_TO_RAD;
+    
+    // horizontal angles
+  updateFusion();
+  float pitch = fusion.roll() - ANG_ROLL;   
+  float roll = fusion.pitch() - ANG_PITCH; 
+
+    // control rates
+  output[1] -= float(GAIN_ANG_ROLL) * roll; 
+  output[0] -= float(GAIN_ANG_PITCH) * pitch;   
 }
 
 /* counter main-rotor torque via yaw bias */

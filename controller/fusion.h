@@ -12,9 +12,11 @@
 imuFilter fusion;
 
 void setupFusion() {
-  #ifdef USING_AUTO_LEVEL
-    fusion.setup( accelX(), accelY(), accelZ() );
-  #else 
-    fusion.setup();
-  #endif
+  fusion.setup( accelX(), accelY(), accelZ() ); 
+}
+    
+void updateFusion() {  
+  fusion.update( gyroX(), gyroY(), gyroZ(), 
+                 accelX(), accelY(), accelZ(), 
+                 GAIN, SD_ACCEL );  
 }

@@ -35,7 +35,7 @@ void setupISR() {
   PCMSK0 |= (1 << PCINT3); 
   // set pins inputs
   pinMode(8,  INPUT_PULLUP);
-  pinMode(9, INPUT_PULLUP);
+  pinMode(9,  INPUT_PULLUP);
   pinMode(10, INPUT_PULLUP);
   pinMode(11, INPUT_PULLUP);
 }
