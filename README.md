@@ -1,13 +1,17 @@
 # Flight controller for an RC helicopter :helicopter:
-This arduino sketch is a flight controller for a 4ch Radio controlled helicopter. It uses an [MPU6050 IMU](https://invensense.tdk.com/products/motion-tracking/6-axis/mpu-6050/) to stabilize the aircraft. 
+
+This arduino sketch is a flight controller for a 4ch radio-controlled helicopter. It uses an [MPU6050 IMU](https://invensense.tdk.com/products/motion-tracking/6-axis/mpu-6050/) to stabilize the aircraft. 
 
 ## How it works
+
 The pitch, roll and yaw axes are stabilized with a respective [PID controller](https://en.wikipedia.org/wiki/PID_controller) using the angular velocity as a proportional term. The yaw axis includes a counter-torque term that increases with throttle. 
 
-In general, the program only improves stability in the _short-term_ and a pilot (or other control algorithm) is needed stabilize the helicopter in the _long-term_. Despite this, the aircraft can maintain a steady hover without pilot input if the PIDs are tuned correctly (in the order of 5 seconds).  
+In general, the program only improves stability in the _short-term_ and a pilot (or other control algorithm) is needed to stabilize the helicopter in the _long-term_. Despite this, the aircraft can maintain a steady hover without pilot input if the PIDs are tuned correctly (in the order of 5 seconds).  
 
 ## Receiver Inputs
-The program is designed to receive __4 PWM inputs__ from a RC receiver and generates __3 PWM outputs__. Two signals go to the cyclic servos and the third goes to the tail-servo or speed controller. Since it assumes that only two servos are used for the cyclic, only a [90-degree swashplate](https://www.rchelicopterfun.com/ccpm.html) is supported. The code assumes the transmitter uses MODE 2, but MODE 1 can be used by swapping the arduino connections to the receiver.
+
+The program is designed to receive __4 PWM inputs__ from an RC receiver and generates __3 PWM outputs__. Two signals go to the cyclic servos and the third goes to the tail-servo or speed controller. Since it assumes that only two servos are used for the cyclic, only a [90-degree swashplate](https://www.rchelicopterfun.com/ccpm.html) is supported. The code assumes the transmitter uses MODE 2, but MODE 1 can be used by swapping the arduino connections to the receiver.
+
 
 ## Schematic
 The sketch was written for an Arduino Nano but it should be compatible with other boards.
