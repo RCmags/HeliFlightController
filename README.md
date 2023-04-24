@@ -17,7 +17,7 @@ The program is designed to receive __4 PWM inputs__ from an RC receiver and gene
 The sketch was written for an Arduino Nano but it should be compatible with other boards.
 
 <p align="center">
-<img width="80%" src = "/images/schematic.png" width = "80%" height = "80%"> 
+<img width="80%" src = "/images/diagram/schematic.png" width = "80%" height = "80%"> 
 </p>
 
 __Note__: replace the tail motor and speed controller with a servo if you're using a variable pitch rotor.
