@@ -22,11 +22,11 @@ __Note__: replace the tail motor and speed controller with a servo if you're usi
 Here's images of the helicopter this code was initially writen for:
 
 <p align="center">
-<img src = "/example_pictures/arduino_view_res.JPG" width = "30%" height = "30%"> <img src = "/example_pictures/side_rev_view_res.JPG" width = "30%" height = "30%"> 
+<img src = "/images/arduino_view.JPG" width = "30%" height = "30%"> <img src = "/images/side_view.JPG" width = "30%" height = "30%"> 
 </p>
 
 <p align="center">
-<img src = "/example_pictures/pitch_stab.gif" width = "30%" height = "30%"> <img src = "/example_pictures/yaw_stab.gif" width = "30%" height = "30%">
+<img src = "/images/pitch_stab.gif" width = "30%" height = "30%"> <img src = "/images/yaw_stab.gif" width = "30%" height = "30%">
 </p>
 
 See: [Flight video](https://www.youtube.com/watch?v=nHYoC72DZKo)
