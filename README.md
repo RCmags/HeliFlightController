@@ -12,7 +12,6 @@ In general, the program only improves stability in the _short-term_ and a pilot 
 
 The program is designed to receive __4 PWM inputs__ from an RC receiver and generates __3 PWM outputs__. Two signals go to the cyclic servos and the third goes to the tail-servo or speed controller. Since it assumes that only two servos are used for the cyclic, only a [90-degree swashplate](https://www.rchelicopterfun.com/ccpm.html) is supported. The code assumes the transmitter uses MODE 2, but MODE 1 can be used by swapping the arduino connections to the receiver.
 
-
 ## Schematic
 The sketch was written for an Arduino Nano but it should be compatible with other boards.
 
@@ -21,6 +20,12 @@ The sketch was written for an Arduino Nano but it should be compatible with othe
 </p>
 
 __Note__: replace the tail motor and speed controller with a servo if you're using a variable pitch rotor.
+
+## Dependencies
+These are the libraries needed to compile this sketch:
+
+- [basicMPU6050](https://github.com/RCmags/basicMPU6050)
+- [imuFilter](https://github.com/RCmags/imuFilter)
 
 ## Example usage
 This is the helicopter the code was initially writen for:
