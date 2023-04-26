@@ -27,8 +27,10 @@ These are the libraries needed to compile this sketch:
 - [basicMPU6050](https://github.com/RCmags/basicMPU6050)
 - [imuFilter](https://github.com/RCmags/imuFilter)
 
-## Example usage
+## Example
 This is the helicopter the code was initially writen for:
+
+See: [Flight video](https://www.youtube.com/watch?v=nHYoC72DZKo)
 
 <p align="center">
 <img src = "/images/arduino_view.JPG" width = "30%" height = "30%"> <img src = "/images/side_view.JPG" width = "30%" height = "30%"> 
@@ -38,4 +40,3 @@ This is the helicopter the code was initially writen for:
 <img src = "/images/pitch_stab.gif" width = "30%" height = "30%"> <img src = "/images/yaw_stab.gif" width = "30%" height = "30%">
 </p>
 
-See: [Flight video](https://www.youtube.com/watch?v=nHYoC72DZKo)
