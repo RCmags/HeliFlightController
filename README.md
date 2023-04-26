@@ -22,7 +22,7 @@ The sketch was written for an Arduino Nano but it should be compatible with othe
 __Note__: replace the tail motor and speed controller with a servo if you're using a variable pitch rotor.
 
 ## Dependencies
-These are the libraries needed to compile this sketch:
+These libraries are needed to compile the code:
 
 - [basicMPU6050](https://github.com/RCmags/basicMPU6050)
 - [imuFilter](https://github.com/RCmags/imuFilter)
