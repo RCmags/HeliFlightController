@@ -79,7 +79,7 @@ void filterInputs(float* output) {
 
     // center output
     output[index] = filter[index] - pwm_mean[index];
-    output[index] = deadband( output[index], -INPUT_DEADBAND, INPUT_DEADBAND);
+    output[index] = deadband( output[index], -INPUT_DEADBAND, INPUT_DEADBAND );
   }
   // scale output
   output[0] *= float(GAIN_ROLL);    

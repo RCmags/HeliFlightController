@@ -19,6 +19,7 @@
 // Pin 3  -> Pitch servo
 // Pin 4  -> Roll servo 
 // Pin 5  -> Tail servo / ESC  
+// Pin A0 -> Tail servo / ESC  
 
 //=================== Code ===================
 
@@ -59,11 +60,14 @@ void loop() {
     autoLevel(input);
   #endif  
   
-  float output[3]; PIDcontroller(input, output);
-  
+  float output[4]; PIDcontroller(input, output);
+
   #ifdef USING_TAIL_ROTOR
     output[2] += torqueBias( input[3] );          // anti-torque
   #endif
+ 
+  output[3] = output[2] + input[3];
+  output[2] -= input[3];
 
   // move servos
   servoPosition(output);   

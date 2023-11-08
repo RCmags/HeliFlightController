@@ -30,11 +30,11 @@ basicMPU6050<LP_FILTER , GYRO_SENS , ACCEL_SENS, ADDRESS_A0,
  * match roll, pitch and yaw axes, (x, y, z) respectively. 
 */
 
-float gyroX() { return  imu.gy(); } 
-float gyroY() { return -imu.gz(); }
-float gyroZ() { return  imu.gx(); }
+float gyroX() { return -imu.gy(); } 
+float gyroY() { return  imu.gx(); }
+float gyroZ() { return  imu.gz(); }
 
 // sign of accelerometer axes may differ from gyroscope 
 float accelX() { return -imu.ay(); }
-float accelY() { return  imu.az(); }
-float accelZ() { return  imu.ax(); }
+float accelY() { return  imu.ax(); }
+float accelZ() { return  imu.az(); }
