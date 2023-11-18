@@ -56,18 +56,11 @@ void loop() {
   // controller output
   imu.updateBias();
   
-  #ifdef USING_AUTO_LEVEL
-    autoLevel(input);
-  #endif  
-  
   float output[4]; PIDcontroller(input, output);
 
   #ifdef USING_TAIL_ROTOR
     output[2] += torqueBias( input[3] );          // anti-torque
   #endif
- 
-  output[3] = output[2] + input[3];
-  output[2] -= input[3];
 
   // move servos
   servoPosition(output);   

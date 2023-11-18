@@ -43,12 +43,8 @@
 //                  2B. Auto level
 //----------------------------------------------------------
 /* NOTE: must enable auto level to use */
-  // I. Gains
-#define GAIN_ANG_PITCH    0                 // Gain to set pitch input to self-level aircraft
-#define GAIN_ANG_ROLL     0                 // Gain to set roll input to self-level aircraft
-  // II. Trim
 #define TRIM_ANG_PITCH    0.0                 // trim to self-level aircraft in pitch
-#define TRIM_ANG_ROLL     0                   // trim to self-level aircraft in roll
+#define TRIM_ANG_ROLL   -20.0                   // trim to self-level aircraft in roll
 
 //----------------------------------------------------------
 //                  3. Servo trims
@@ -84,4 +80,4 @@
 //#define USING_WEIGHT_SHIFT                    // Uncomment for weight-shift control 
 //#define USING_TAIL_ROTOR                      // Uncomment for tail rotor correction
 //#define USING_INTEGRAL_DECAY                  // Uncomment to enable integral decay
-//#define USING_AUTO_LEVEL                      // Uncomment to enable self-leveling correction
+#define USING_AUTO_LEVEL                      // Uncomment to enable self-leveling correction

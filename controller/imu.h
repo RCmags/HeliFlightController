@@ -35,6 +35,6 @@ float gyroY() { return  imu.gx(); }
 float gyroZ() { return  imu.gz(); }
 
 // sign of accelerometer axes may differ from gyroscope 
-float accelX() { return -imu.ay(); }
-float accelY() { return  imu.ax(); }
-float accelZ() { return  imu.az(); }
+float accelX() { return  imu.ay(); }
+float accelY() { return -imu.ax(); }
+float accelZ() { return -imu.az(); }
