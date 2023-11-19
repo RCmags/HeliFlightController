@@ -1,5 +1,15 @@
 //============= PID controller =============
 
+/* Linearized error function */
+vec3_t crossAngle(vec3_t v1, vec3_t v2) {
+  vec3_t cross = v1.cross(v2);  // sin
+  float  dot   = v1.dot(v2);    // cos
+  
+  // triangle wave approximation
+  float scale = 0.5 + (1.1 - 0.1*dot*dot)/(1 + 0.9*dot);
+  return cross*scale;
+}
+
 /* Apply PID controller to each rotational axis */
 void PIDcontroller( float* input, float* output ) {
   // 1. Time step:
@@ -17,7 +27,7 @@ void PIDcontroller( float* input, float* output ) {
   constexpr float GAIN_DERIV[] = { GAIN_DERIV_ROLL, GAIN_DERIV_PITCH, GAIN_DERIV_YAW };
     
     // integral term:
-  constexpr float SCALE = (DEG_TO_RAD * 150) / 500;   // control input rate. Convert 500us to 150 deg/s 
+  constexpr float SCALE = (DEG_TO_RAD * 150) / 500.0;   // control input rate. Convert 500us to 150 deg/s 
     
     // alpha-beta filter:
   constexpr float BETA = ALPHA * ALPHA * 0.25;
@@ -41,12 +51,31 @@ void PIDcontroller( float* input, float* output ) {
     float dyaw = -0.5 * angvel_t[2] * dt;
     fusion.rotateHeading( dyaw, SMALL_ANGLE );
 
-    // heading
+    // heading error
     updateFusion();
-        
-    angle[0] = GAIN_INT[0] * ( fusion.roll() - ANG_ROLL ); 
-    angle[1] = GAIN_INT[1] * ( fusion.pitch() - ANG_PITCH );   
-    angle[2] = GAIN_INT[2] * fusion.yaw();  
+
+      // target
+    vec3_t vec_rot = vec3_t( angvel_t[0], angvel_t[1], 0 ) * 0.25;
+    
+    quat_t quat_rot; 
+    quat_rot.setRotation( vec_rot, SMALL_ANGLE );
+    quat_rot = quat_rot.norm();
+
+    vec3_t vec_z = quat_rot.rotate( vec3_t(0,0,1) , LOCAL_FRAME );
+    vec3_t vec_y = quat_rot.rotate( vec3_t(0,1,0) , LOCAL_FRAME );
+    vec3_t vec_x = quat_rot.rotate( vec3_t(1,0,0) , LOCAL_FRAME );
+
+      // measure
+    vec3_t error; 
+    error  = crossAngle( fusion.getZaxis(LOCAL_FRAME), vec_z );
+    error += crossAngle( fusion.getYaxis(LOCAL_FRAME), vec_y );
+    error += crossAngle( fusion.getXaxis(LOCAL_FRAME), vec_x );
+    error *= 0.5;
+    
+      // covert to channel axes
+    angle[0] = GAIN_INT[0] * error.x;    // roll
+    angle[1] = GAIN_INT[1] * error.y;    // pitch
+    angle[2] = GAIN_INT[2] * error.z;    // yaw
   #endif
   
   for( int i = 0; i < 3; i += 1 ) {
@@ -60,9 +89,9 @@ void PIDcontroller( float* input, float* output ) {
     
     // integrate
     angvel[i] += angacc[i] * 0.5 * dt;           // trapezoidal rule. Use derivative to improve area slice. 
-    
+
     #ifndef USING_AUTO_LEVEL
-      angle[i] += GAIN_INT[i] * dangvel * dt;
+      angle[i] += GAIN_INT[i] * dangvel * dt;    // Use quaternion? Need to prevent saturation.
       
       #ifdef USING_INTEGRAL_DECAY
         angle[i] -= DECAY[i] * angle[i] * dt;       

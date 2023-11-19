@@ -12,18 +12,18 @@
 /* NOTE: For a given axis, the propotional, integral and 
          derivative terms must have the same sign */
   // I. Proportional:                         // Proportional gain. Adjusts damping response. Increase to retard rotation. 
-#define GAIN_PROP_ROLL    140.0
-#define GAIN_PROP_PITCH   350.0
+#define GAIN_PROP_ROLL    110.0
+#define GAIN_PROP_PITCH   280.0
 #define GAIN_PROP_YAW     18.0
   
   // II. Integral:                            // Integral gain. Adjusts spring respose. Increase to have a stronger restoring force.
-#define GAIN_INT_ROLL     700.0
-#define GAIN_INT_PITCH    900.0
+#define GAIN_INT_ROLL     700.0 //700
+#define GAIN_INT_PITCH    700.0 //900
 #define GAIN_INT_YAW      150.0
 
   // III. Derivative:                         // Derivative gain. Reduces oscillations of proportional term. Magnifies vibration noise.
-#define GAIN_DERIV_ROLL   8.0
-#define GAIN_DERIV_PITCH  10.0
+#define GAIN_DERIV_ROLL   4.0
+#define GAIN_DERIV_PITCH  7.0
 #define GAIN_DERIV_YAW    1.0
 
   // IV. Phase angle
@@ -43,8 +43,8 @@
 //                  2B. Auto level
 //----------------------------------------------------------
 /* NOTE: must enable auto level to use */
-#define TRIM_ANG_PITCH    0.0                 // trim to self-level aircraft in pitch
-#define TRIM_ANG_ROLL   -20.0                   // trim to self-level aircraft in roll
+#define TRIM_ANG_PITCH    -5.0                // trim to self-level aircraft in pitch
+#define TRIM_ANG_ROLL    -10.0                // trim to self-level aircraft in roll
 
 //----------------------------------------------------------
 //                  3. Servo trims
